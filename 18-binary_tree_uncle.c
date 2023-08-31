@@ -36,7 +36,7 @@ binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 	/** Check if the left child in parent equal to node value */
 	if (grand_parent->left == parent)
 		return (grand_parent->right);
-	else
-		/** Check if the right child in parent equal to node value */
-		return (grand_parent->left);
+
+	/** Check if the right child in parent equal to node value */
+	return (grand_parent->left);
 }
