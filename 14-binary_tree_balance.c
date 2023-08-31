@@ -52,10 +52,11 @@ int binary_tree_balance(const binary_tree_t *tree)
 	/** check for nodes with only one child */
 	else if (tree->left == NULL || tree->right == NULL)
 		return (-1);
-
-	h_left = binary_tree_height(tree->left);
-	h_right = binary_tree_height(tree->right);
-
-	/** balace factor equal height left minus height right */
-	return (h_left - h_right);
+	else
+	{
+		h_left = binary_tree_height(tree->left);
+		h_right = binary_tree_height(tree->right);
+		/** balace factor equal height left minus height right */
+		return (h_left - h_right);
+	}
 }
