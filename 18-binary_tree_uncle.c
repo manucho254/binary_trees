@@ -25,23 +25,18 @@ binary_tree_t *binary_tree_parent(binary_tree_t *node)
 
 binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 {
-	binary_tree_t *parent = NULL;
+	binary_tree_t *parent = NULL, *grand_parent = NULL;
 
 	/** If node doesn't have a parent return NULL*/
-	if (node == NULL)
+	if (node == NULL || node->parent == NULL || node->parent->parent == NULL)
 		return (NULL);
 
 	parent = binary_tree_parent(node);
-	if (parent == NULL || parent->parent == NULL)
-		return (NULL);
-
-	parent = binary_tree_parent(parent);
+	grand_parent = binary_tree_parent(parent);
 	/** Check if the left child in parent equal to node value */
-	if (parent->left == node->parent)
-		parent = parent->right;
-	/** Check if the right child in parent equal to node value */
-	if (parent->right == node->parent)
-		parent = parent->left;
-
-	return (parent);
+	if (grand_parent->left == parent)
+		return (grand_parent->right);
+	else
+		/** Check if the right child in parent equal to node value */
+		return (grand_parent->left);
 }
