@@ -34,12 +34,14 @@ binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 	parent = binary_tree_parent(node);
 	if (parent == NULL || parent->parent == NULL)
 		return (NULL);
+
+	parent = binary_tree_parent(parent);
 	/** Check if the left child in parent equal to node value */
-	if (parent->parent->left->n == node->parent->n)
-		parent = parent->parent->right;
+	if (parent->left == node->parent)
+		parent = parent->right;
 	/** Check if the right child in parent equal to node value */
-	if (parent->parent->right->n == node->parent->n)
-		parent = parent->parent->left;
+	if (parent->right == node->parent)
+		parent = parent->left;
 
 	return (parent);
 }
