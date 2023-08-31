@@ -31,6 +31,26 @@ size_t binary_tree_height(const binary_tree_t *tree)
 }
 
 /**
+ * binary_tree_is_leaf - check if node is a leaf
+ *
+ * @node: pointer to node to check.
+ *
+ * Return: 1 if node is leaf else return 0.
+ */
+
+int binary_tree_is_leaf(const binary_tree_t *node)
+{
+	/** If node is null its not a leaf */
+	if (node == NULL)
+		return (0);
+	/** If eather left or right is not null its not a leaf */
+	if (node->left != NULL || node->right != NULL)
+		return (0);
+
+	return (1);
+}
+
+/**
  * binary_tree_balance - measures the,
  * balance factor of a binary tree.
  *
@@ -46,17 +66,15 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	/** check for Leaf nodes */
-	if (tree->left == NULL && tree->right == NULL)
-		return (0);
-	/** check for nodes with only one child */
-	else if (tree->left == NULL || tree->right == NULL)
+	h_left = binary_tree_height(tree->left);
+	h_right = binary_tree_height(tree->right);
+	/** for cases where the we only have the right child */
+	if (!binary_tree_is_leaf(tree->left) && binary_tree_is_leaf(tree->right))
 		return (-1);
-	else
-	{
-		h_left = binary_tree_height(tree->left);
-		h_right = binary_tree_height(tree->right);
-		/** balace factor equal height left minus height right */
-		return (h_left - h_right);
-	}
+	/** for cases where the we only have the left child */
+	if (binary_tree_is_leaf(tree->left) && !binary_tree_is_leaf(tree->right))
+		return (1);
+
+	/** balace factor equal height left minus height right */
+	return (h_left - h_right);
 }
