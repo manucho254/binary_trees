@@ -49,9 +49,8 @@ int binary_tree_balance(const binary_tree_t *tree)
 	/** check for Leaf nodes */
 	if (tree->left == NULL && tree->right == NULL)
 		return (0);
-
 	/** check for nodes with only one child */
-	if (tree->left == NULL || tree->right == NULL)
+	else if (tree->left == NULL || tree->right == NULL)
 		return (-1);
 
 	h_left = binary_tree_height(tree->left);
