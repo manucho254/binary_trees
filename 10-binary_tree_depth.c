@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 /**
- * binary_tree_height - measure the height of a binary tree
+ * binary_tree_depth - measure the depth of a binary tree
  *
  * @tree: pointer to tree to measure height
  *
- * Return: size of binary tree
+ * Return: depth of binary tree
  */
 
 size_t binary_tree_depth(const binary_tree_t *tree)
