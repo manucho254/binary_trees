@@ -6,7 +6,7 @@
  *
  * @tree: pointer to tree to measure height
  *
- * Return: size of binary tree
+ * Return: height of binary tree
  */
 
 size_t binary_tree_height(const binary_tree_t *tree)
