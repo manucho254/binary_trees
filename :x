@@ -1,0 +1,26 @@
+#include "binary_trees.h"
+#include <stdlib.h>
+
+/**
+ * binary_tree_height - measure the height of a binary tree
+ *
+ * @tree: pointer to tree to measure height
+ *
+ * Return: size of binary tree
+ */
+
+size_t binary_tree_depth(const binary_tree_t *tree)
+{
+	size_t l_depth, r_depth;
+
+	if (tree == NULL)
+		return (0);
+
+	if (tree->parent == 0)
+		return (0);
+
+	l_depth = binary_tree_depth(tree->left); /** depth of left */
+	r_depth = binary_tree_depth(tree->right); /** depth of right */
+	
+	return (l_depth + r_depth);
+}
