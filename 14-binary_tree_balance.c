@@ -69,10 +69,10 @@ int binary_tree_balance(const binary_tree_t *tree)
 	h_left = binary_tree_height(tree->left);
 	h_right = binary_tree_height(tree->right);
 	/** for cases where the we only have the right child */
-	if (!binary_tree_is_leaf(tree->left) && binary_tree_is_leaf(tree->right))
+	if (tree->left == NULL && binary_tree_is_leaf(tree->right))
 		return (-1);
 	/** for cases where the we only have the left child */
-	if (binary_tree_is_leaf(tree->left) && !binary_tree_is_leaf(tree->right))
+	if (binary_tree_is_leaf(tree->left) && tree->right == NULL)
 		return (1);
 
 	/** balace factor equal height left minus height right */
