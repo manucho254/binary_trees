@@ -3,51 +3,43 @@
 #include <stdio.h>
 
 /**
- * binary_tree_height - measure the height of a binary tree
+ * binary_tree_left_height - measure the height of a binary tree
  *
  * @tree: pointer to tree to measure height
  *
  * Return: height of binary tree
  */
 
-size_t binary_tree_height(const binary_tree_t *tree)
+size_t binary_tree_left_height(const binary_tree_t *tree)
 {
-	size_t l_depth, r_depth;
+	size_t l_depth;
 
 	if (tree == NULL)
 		return (0);
 
-	/** If node is leaf node we return 0 */
-	if (tree->left == NULL && tree->right == NULL)
-		return (0);
+	l_depth = binary_tree_left_height(tree->left); /** depth of left */
 
-	l_depth = binary_tree_height(tree->left); /** depth of left */
-	r_depth = binary_tree_height(tree->right); /** depth of right */
-
-	if (l_depth > r_depth)
-		return (l_depth + 1);
-	else
-		return (r_depth + 1);
+	return (l_depth + 1);
 }
 
 /**
- * binary_tree_is_leaf - check if node is a leaf
+ * binary_tree_right_height - measure the height of a binary tree
  *
- * @node: pointer to node to check.
+ * @tree: pointer to tree to measure height
  *
- * Return: 1 if node is leaf else return 0.
+ * Return: height of binary tree
  */
 
-int binary_tree_is_leaf(const binary_tree_t *node)
+size_t binary_tree_right_height(const binary_tree_t *tree)
 {
-	/** If node is null its not a leaf */
-	if (node == NULL)
-		return (0);
-	/** If eather left or right is not null its not a leaf */
-	if (node->left != NULL || node->right != NULL)
+	size_t r_depth;
+
+	if (tree == NULL)
 		return (0);
 
-	return (1);
+	r_depth = binary_tree_right_height(tree->right); /** depth of right */
+
+	return (r_depth + 1);
 }
 
 /**
@@ -66,14 +58,10 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	h_left = binary_tree_height(tree->left);
-	h_right = binary_tree_height(tree->right);
-	/** for cases where the we only have the right child */
-	if (tree->left == NULL && binary_tree_is_leaf(tree->right))
-		return (-1);
-	/** for cases where the we only have the left child */
-	if (binary_tree_is_leaf(tree->left) && tree->right == NULL)
-		return (-1);
+	/** height of left subtree */
+	h_left = binary_tree_left_height(tree->left);
+	/** height of right subtree */
+	h_right = binary_tree_right_height(tree->right);
 
 	/** balace factor equal height left minus height right */
 	return (h_left - h_right);
